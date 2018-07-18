@@ -1,0 +1,6 @@
+br\com\exercicio\custo_transp\model\CaminhaoBau.class
+br\com\exercicio\custo_transp\CustoTranspApplication.class
+br\com\exercicio\custo_transp\model\CaminhaoCacamba.class
+br\com\exercicio\custo_transp\model\Veiculo.class
+br\com\exercicio\custo_transp\controller\CustoTransporteController.class
+br\com\exercicio\custo_transp\model\Carreta.class

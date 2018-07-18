@@ -23,34 +23,34 @@ public class Veiculo implements Serializable{
 		this.cargaTransportada = carga;
 	}
 	
-	private Double getCustoDistanciaRodoviaPavimentada() {
+	protected Double getCustoDistanciaRodoviaPavimentada() {
 		return this.distanciaRodoviaPavimentada * 0.54;
 	}
 	
-	private Double getCustoDistanciaRodoviaNaoPavimentada() {
+	protected Double getCustoDistanciaRodoviaNaoPavimentada() {
 		return this.distanciaRodoviaNaoPavimentada * 0.62;
 	}
 	
-	public Double getCustoDistanciaRodovias() {
+	protected Double getCustoDistanciaRodovias() {
 		return getCustoDistanciaRodoviaPavimentada() +
 				getCustoDistanciaRodoviaNaoPavimentada();
 	}
 	
-	private Double getAdicionalCargaRodoviaPavimentada() {
-		if	(this.distanciaRodoviaPavimentada != 0.0 && this.cargaTransportada > 5) {
+	protected Double getAdicionalCargaRodoviaPavimentada() {
+		if	(this.distanciaRodoviaPavimentada > 0.0 && this.cargaTransportada > 5) {
 			return ((this.cargaTransportada - 5) * 0.02) * this.distanciaRodoviaPavimentada;
 		}
 		return 0.0;
 	}
 	
-	private Double getAdicionalCargaRodoviaNaoPavimentada() {
-		if	(this.distanciaRodoviaNaoPavimentada != 0.0 && this.cargaTransportada > 5) {
+	protected Double getAdicionalCargaRodoviaNaoPavimentada() {
+		if	(this.distanciaRodoviaNaoPavimentada > 0.0 && this.cargaTransportada > 5) {
 			return ((this.cargaTransportada - 5) * 0.02) * this.distanciaRodoviaNaoPavimentada;
 		}
 		return 0.0;
 	}
 	
-	public Double getCustoAdicionalSobrecargaRodovias() {
+	protected Double getCustoAdicionalSobrecargaRodovias() {
 		return getAdicionalCargaRodoviaPavimentada() +
 				getAdicionalCargaRodoviaNaoPavimentada();
 	}
