@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Custo de Transporte de Carga</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/png" href="/static/images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  />
+</head>
+<body>
+    <div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<form th:object="${veiculo}" th:action="@{/index}" method="post" >
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Distância Rodovia Pavimentada</th>
+									<th class="cell100 column2">Distância Rodovia Não Pavimentada</th>
+									<th class="cell100 column3">Veículo Utilizado</th>
+									<th class="cell100 column4">Carga Transportada</th>
+									<th class="cell100 column5">Custo Do Transporte</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 body">
+									<td class="cell100 column1">
+										<input type="text" class="form-control input-sm" th:field="*{distanciaRodoviaPavimentada}" maxlength="10" placeholder="Informe a distância em KM"/>
+									</td>
+									<td class="cell100 column2">
+										<input type="text" class="form-control input-sm" th:field="*{distanciaRodoviaNaoPavimentada}" maxlength="10" placeholder="Informe a distância em KM"/>
+									</td>
+									<td class="cell100 column3">
+										9:00 AM - 11:00 AM
+									</td>
+									<td class="cell100 column4">
+										<input type="text" class="form-control input-sm" th:field="*{carga}" maxlength="10" placeholder="Informe a carga em toneladas"/>
+									</td>
+									<td class="cell100 column5">
+										<label class="col-md-2 control-label" th:text="*{custoTransporte}"></label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<button type="submit" class="btn btn-sm btn-primary">Calcular</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
