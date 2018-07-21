@@ -24,36 +24,41 @@ public class CustoTransporteController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.POST, params="action=calcular")
 	public String calcular(@ModelAttribute VeiculoDTO veiculoDTO, Model model) {
-		if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CAMINHAO_BAU)) {
-			
-			CaminhaoBau cb = new CaminhaoBau(
-					veiculoDTO.getDistanciaRodoviaPavimentada(), 
-					veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
-					veiculoDTO.getCarga());
-			veiculoDTO.setCustoTransporte(cb.getCustoTransporte());
-		}else if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CAMINHAO_CACAMBA)) {
-			
-			CaminhaoCacamba cc = new CaminhaoCacamba(
-					veiculoDTO.getDistanciaRodoviaPavimentada(), 
-					veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
-					veiculoDTO.getCarga());
-			veiculoDTO.setCustoTransporte(cc.getCustoTransporte());
-		}else if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CARRETA)) {
-			
-			Carreta c = new Carreta(
-					veiculoDTO.getDistanciaRodoviaPavimentada(), 
-					veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
-					veiculoDTO.getCarga());
-			veiculoDTO.setCustoTransporte(c.getCustoTransporte());
-		}
-		
+		veiculoDTO.setCustoTransporte(getCustoTransporte(veiculoDTO));	
 		model.addAttribute("veiculo", veiculoDTO);
 		model.addAttribute("listaTipos", EnumTipoVeiculo.values());
 		return "index";
 	}
 	
-	@RequestMapping(value = "/index", method = RequestMethod.POST, params="action=limpar")
-	public String limpar(Model model) {
-		return this.index(model);
+	public Double getCustoTransporte(VeiculoDTO veiculoDTO) {
+		if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CAMINHAO_BAU)) {
+			return getCustoTransporteCaminhaoBau(veiculoDTO);
+		}else if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CAMINHAO_CACAMBA)) {
+			return getCustoTransporteCaminhaoCacamba(veiculoDTO);
+		}else if	(veiculoDTO.getTipoVeiculo().equals(EnumTipoVeiculo.CARRETA)) {
+			return getCustoTransporteCarreta(veiculoDTO);
+		}
+		return 0.0;
+	}
+
+	private Double getCustoTransporteCarreta(VeiculoDTO veiculoDTO) {
+		return new Carreta(veiculoDTO.getDistanciaRodoviaPavimentada(), 
+							veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
+							veiculoDTO.getCarga())
+				.getCustoTransporte();
+	}
+
+	private Double getCustoTransporteCaminhaoCacamba(VeiculoDTO veiculoDTO) {
+		return new CaminhaoCacamba(veiculoDTO.getDistanciaRodoviaPavimentada(), 
+									veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
+									veiculoDTO.getCarga())
+				.getCustoTransporte();
+	}
+
+	private Double getCustoTransporteCaminhaoBau(VeiculoDTO veiculoDTO) {
+		return new CaminhaoBau(veiculoDTO.getDistanciaRodoviaPavimentada(), 
+								veiculoDTO.getDistanciaRodoviaNaoPavimentada(), 
+								veiculoDTO.getCarga())
+				.getCustoTransporte();
 	}
 }
