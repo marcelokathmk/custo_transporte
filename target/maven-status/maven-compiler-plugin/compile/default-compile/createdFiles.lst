@@ -1,9 +1,0 @@
-br\com\exercicio\custo_transp\model\Carreta.class
-br\com\exercicio\custo_transp\model\enums\EnumTipoVeiculo.class
-br\com\exercicio\custo_transp\model\CaminhaoCacamba.class
-br\com\exercicio\custo_transp\model\Veiculo.class
-br\com\exercicio\custo_transp\model\CaminhaoBau.class
-br\com\exercicio\custo_transp\model\impl\CustoTransporte.class
-br\com\exercicio\custo_transp\CustoTranspApplication.class
-br\com\exercicio\custo_transp\view\VeiculoDTO.class
-br\com\exercicio\custo_transp\controller\CustoTransporteController.class

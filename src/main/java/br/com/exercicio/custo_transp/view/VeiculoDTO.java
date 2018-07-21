@@ -1,6 +1,7 @@
 package br.com.exercicio.custo_transp.view;
 
 import java.io.Serializable;
+
 import br.com.exercicio.custo_transp.model.enums.EnumTipoVeiculo;
 
 public class VeiculoDTO implements Serializable{
@@ -27,7 +28,7 @@ public class VeiculoDTO implements Serializable{
 		this.carga = carga;
 		this.tipoVeiculo = tipoVeiculo;
 	}
-
+	
 	public Double getDistanciaRodoviaPavimentada() {
 		return distanciaRodoviaPavimentada;
 	}

@@ -5,29 +5,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 </head>
-<body>
+<body style="margin-top: 30px;">
 	<form th:object="${veiculo}" th:action="@{/index}" method="post" >
-		<div class="form-group">
-    		<label for="distanciaPavimentada">Distância Rodovia Pavimentada</label>
-    		<input type="number" th:field="*{distanciaRodoviaPavimentada}" class="form-control" id="distanciaPavimentada" placeholder="Informe em KM">
-  		</div>
-  		<div class="form-group">
-    		<label for="distanciaNaoPavimentada">Distância Rodovia Não Pavimentada</label>
-    		<input type="number" th:field="*{distanciaRodoviaNaoPavimentada}" class="form-control" id="distanciaNaoPavimentada" placeholder="Informe em KM">
-  		</div>
-  		<div class="form-group">
-    		<label>Veículo Utilizado</label>
-  		</div>
-  		<div class="form-group">
-    		<label for="carga">Carga Transportada</label>
-    		<input type="number" th:field="*{carga}" class="form-control" id="carga" placeholder="Informe em Toneladas">
-  		</div>
-  		<div class="form-group">
-    		<label for="carga">Custo Do Transporte</label>
-    		<input type="number" th:field="*{custoTransporte}" class="form-control" disabled="disabled" id="custoTransporte">
-  		</div>
-		<button type="submit" class="btn btn-primary">Calcular</button>
-		<button type="reset" class="btn btn-secondary">Limpar</button>				
+		<div class="card" style="width: 30%; margin: 0 auto;">
+  			<div class="card-body" style="margin-top: 20px;">
+    			<h5 class="card-title">Custo de Transporte de Carga</h5>
+    			
+    			<div class="form-group">
+    				<label for="distanciaPavimentada">Distância em rodovia pavimentada</label>
+    				<input type="text" th:field="*{distanciaRodoviaPavimentada}" style="width: 50%;" class="form-control" id="distanciaPavimentada" placeholder="Informe em KM">
+  				</div>
+  				<div class="form-group">
+    				<label for="distanciaNaoPavimentada">Distância em rodovia não pavimentada</label>
+    				<input type="text" th:field="*{distanciaRodoviaNaoPavimentada}" style="width: 50%;" class="form-control" id="distanciaNaoPavimentada" placeholder="Informe em KM">
+  				</div>
+  				<div class="form-group">
+    				<label for="tipoVeiculo">Veículo utilizado</label>
+    				<select class="form-control" th:field="*{tipoVeiculo}" id="tipoVeiculo" style="width: 50%;">
+      					<option th:each="tipo : ${listaTipos}" th:value="${tipo}" th:text="${tipo.descricao}" />
+    				</select>
+  				</div>
+  				<div class="form-group">
+    				<label for="carga">Carga transportada</label>
+    				<input type="text" th:field="*{carga}" class="form-control" style="width: 50%;" id="carga" placeholder="Informe em Toneladas">
+  				</div>	
+  				<div class="form-group">
+    				<label for="carga">Custo do transporte</label>
+    				<input type="text" th:field="*{custoTransporte}" class="form-control" style="width: 50%;" disabled="disabled" id="custoTransporte">
+  				</div>
+				<button type="submit" name="action" value="calcular" class="btn btn-primary">Calcular</button>
+				<button type="submit" name="action" value="limpar" class="btn btn-secondary">Limpar</button>		
+  			</div>
+		</div>
 	</form>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
