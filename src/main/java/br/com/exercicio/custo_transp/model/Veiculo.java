@@ -2,11 +2,8 @@ package br.com.exercicio.custo_transp.model;
 
 import java.io.Serializable;
 
-/**
- * @author Marcelo Kath
- *
- * 
- */
+import br.com.exercicio.custo_transp.model.exceptions.CampoNuloCustoTransporteException;
+
 public class Veiculo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -24,10 +21,16 @@ public class Veiculo implements Serializable{
 	}
 	
 	protected Double getCustoDistanciaRodoviaPavimentada() {
+		if	(this.distanciaRodoviaPavimentada == null) {
+			throw new CampoNuloCustoTransporteException("distanciaRodoviaPavimentada");
+		}
 		return this.distanciaRodoviaPavimentada * 0.54;
 	}
 	
 	protected Double getCustoDistanciaRodoviaNaoPavimentada() {
+		if	(this.distanciaRodoviaNaoPavimentada == null) {
+			throw new CampoNuloCustoTransporteException("distanciaRodoviaNaoPavimentada");
+		}
 		return this.distanciaRodoviaNaoPavimentada * 0.62;
 	}
 	
@@ -51,6 +54,9 @@ public class Veiculo implements Serializable{
 	}
 	
 	protected Double getCustoAdicionalSobrecargaRodovias() {
+		if	(this.cargaTransportada == null) {
+			throw new CampoNuloCustoTransporteException("cargaTransportada");
+		}
 		return getAdicionalCargaRodoviaPavimentada() +
 				getAdicionalCargaRodoviaNaoPavimentada();
 	}
