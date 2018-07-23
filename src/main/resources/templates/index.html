@@ -14,6 +14,17 @@
  			document.getElementById("custoTransporte").value="";
  			document.getElementById("tipoVeiculo").selectedIndex="0";
  		}
+ 		function aceitarCaracteres(campo, caracteres){
+ 			var digits=caracteres;
+ 			var campo_temp; 
+ 			for (var i=0;i<campo.value.length;i++){
+ 			  campo_temp=campo.value.substring(i,i+1)	
+ 			  if (digits.indexOf(campo_temp)==-1){
+ 					campo.value = campo.value.substring(0,i);
+ 					break;
+ 			   }
+ 			}
+ 		}
  	</script>
 </head>
 <body style="margin-top: 30px;">
@@ -24,16 +35,16 @@
     			
     			<div class="form-group">
     				<label for="distanciaPavimentada">Distância em rodovia pavimentada</label>
-    				<input type="text" th:field="*{distanciaRodoviaPavimentada}" style="width: 50%;" class="form-control" id="distanciaPavimentada" placeholder="Informe em KM" required>
+    				<input type="text" th:field="*{distanciaRodoviaPavimentada}" onKeyUp="aceitarCaracteres(this, '.1234567890')" placeholder="KM" style="width: 50%;" class="form-control" id="distanciaPavimentada" required>
     				<div class="invalid-feedback">
-          				O campo não pode estar vazio. Zero é o valor mínimo.
+          				O campo não pode estar vazio.
         			</div>
   				</div>
   				<div class="form-group">
     				<label for="distanciaNaoPavimentada">Distância em rodovia não pavimentada</label>
-    				<input type="text" th:field="*{distanciaRodoviaNaoPavimentada}" style="width: 50%;" class="form-control" id="distanciaNaoPavimentada" placeholder="Informe em KM" required>
+    				<input type="text" th:field="*{distanciaRodoviaNaoPavimentada}" onKeyUp="aceitarCaracteres(this, '.1234567890')" placeholder="KM" style="width: 50%;" class="form-control" id="distanciaNaoPavimentada" required>
     				<div class="invalid-feedback">
-          				O campo não pode estar vazio. Zero é o valor mínimo.
+          				O campo não pode estar vazio.
         			</div>
   				</div>
   				<div class="form-group">
@@ -44,14 +55,19 @@
   				</div>
   				<div class="form-group">
     				<label for="carga">Carga transportada</label>
-    				<input type="text" th:field="*{carga}" class="form-control" style="width: 50%;" id="carga" placeholder="Informe em Toneladas" required>
+    				<input type="number" min="0" th:field="*{carga}" onKeyUp="aceitarCaracteres(this, '1234567890')" placeholder="Toneladas" class="form-control" style="width: 50%;" id="carga" required>
     				<div class="invalid-feedback">
-          				O campo não pode estar vazio. Zero é o valor mínimo.
+          				O campo não pode estar vazio ou negativo. Zero é o valor mínimo.
         			</div>
-  				</div>	
-  				<div class="form-group">
-    				<label for="carga">Custo do transporte</label>
-    				<input type="text" th:field="*{custoTransporte}" class="form-control" style="width: 50%;" disabled="disabled" id="custoTransporte">
+  				</div>
+  				<div class="form-group">	
+  					<label for="carga">Custo do transporte</label>
+    				<div class="input-group" style="width: 50%;">
+    					<div class="input-group-prepend">
+          					<span class="input-group-text" id="inputGroupPrepend">R$</span>
+        				</div>
+    					<input type="text" th:value="${#numbers.formatDecimal(veiculo.custoTransporte, 2, 2, 'COMMA')}" class="form-control" aria-describedby="inputGroupPrepend" disabled="disabled" id="custoTransporte">
+    				</div>
   				</div>
 				<button type="submit" name="action" value="calcular" class="btn btn-primary">Calcular</button>
 				<button type="button" onclick="resetForm();" name="action" value="limpar" class="btn btn-secondary">Limpar</button>		

@@ -19,7 +19,6 @@ public class VeiculoDTO implements Serializable{
 	private Double custoTransporte;
 	
 	public VeiculoDTO() {
-		this.custoTransporte = 0.0;
 	}
 	
 	public VeiculoDTO(Double distanciaRodoviaPavimentada, Double distanciaRodoviaNaoPavimentada, Integer carga, EnumTipoVeiculo tipoVeiculo) {

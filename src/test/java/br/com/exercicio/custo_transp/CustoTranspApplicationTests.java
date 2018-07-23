@@ -2,6 +2,9 @@ package br.com.exercicio.custo_transp;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,10 +31,11 @@ public class CustoTranspApplicationTests {
 		assertEquals(cb.getCustoTransporte(), Double.valueOf(37.20));
 	}
 	
-	
+	@Test
 	public void testeSucessoCustoTranspCarreta() {
 		Carreta c = new Carreta(0.0, 180.00, 12);
-		assertEquals(c.getCustoTransporte(), Double.valueOf(150.19));
+		BigDecimal bd = new BigDecimal(c.getCustoTransporte()).setScale(2, RoundingMode.HALF_EVEN);
+		assertEquals(Double.valueOf(bd.doubleValue()), Double.valueOf(150.19));
 	}
 	
 	@Test

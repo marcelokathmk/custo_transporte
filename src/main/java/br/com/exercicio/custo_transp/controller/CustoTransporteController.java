@@ -2,10 +2,10 @@ package br.com.exercicio.custo_transp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import br.com.exercicio.custo_transp.model.CaminhaoBau;
 import br.com.exercicio.custo_transp.model.CaminhaoCacamba;
 import br.com.exercicio.custo_transp.model.Carreta;
@@ -23,7 +23,7 @@ public class CustoTransporteController {
 	}
 	
 	@RequestMapping(value = "/index", method = RequestMethod.POST, params="action=calcular")
-	public String calcular(@ModelAttribute VeiculoDTO veiculoDTO, Model model) {
+	public String calcular(@ModelAttribute VeiculoDTO veiculoDTO, BindingResult bindingResult, Model model) {
 		veiculoDTO.setCustoTransporte(getCustoTransporte(veiculoDTO));	
 		model.addAttribute("veiculo", veiculoDTO);
 		model.addAttribute("listaTipos", EnumTipoVeiculo.values());
